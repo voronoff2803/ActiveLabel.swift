@@ -57,17 +57,8 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
     @IBInspectable public var minimumLineHeight: CGFloat = 0 {
         didSet { updateTextStorage(parseText: false) }
     }
-    @IBInspectable public var highlightFontName: String? = nil {
+    open var hightlightFont: UIFont? {
         didSet { updateTextStorage(parseText: false) }
-    }
-    public var highlightFontSize: CGFloat? = nil {
-        didSet { updateTextStorage(parseText: false) }
-    }
-    
-    // MARK: - Computed Properties
-    private var hightlightFont: UIFont? {
-        guard let highlightFontName = highlightFontName, let highlightFontSize = highlightFontSize else { return nil }
-        return UIFont(name: highlightFontName, size: highlightFontSize)
     }
     
     // MARK: - public methods
