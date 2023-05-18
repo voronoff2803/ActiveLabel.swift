@@ -57,7 +57,7 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
     @IBInspectable public var minimumLineHeight: CGFloat = 0 {
         didSet { updateTextStorage(parseText: false) }
     }
-    open var hightlightFont: UIFont? {
+    open var highlightFont: UIFont? {
         didSet { updateTextStorage(parseText: false) }
     }
     
@@ -326,7 +326,7 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
             case .email: attributes[NSAttributedString.Key.foregroundColor] = URLColor
             }
             
-            if let highlightFont = hightlightFont {
+            if let highlightFont = highlightFont {
                 attributes[NSAttributedString.Key.font] = highlightFont
             }
             
@@ -421,7 +421,7 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
             attributes[NSAttributedString.Key.foregroundColor] = unselectedColor
         }
         
-        if let highlightFont = hightlightFont {
+        if let highlightFont = highlightFont {
             attributes[NSAttributedString.Key.font] = highlightFont
         }
         
