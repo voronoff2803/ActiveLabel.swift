@@ -32,23 +32,22 @@ struct ActiveBuilder {
         let nsstring = text as NSString
         var elements: [ElementTuple] = []
 
-        for match in matches where match.range.length > 2 {
-            let word = nsstring.substring(with: match.range)
-                .trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
-
-            guard let maxLength = maximumLength, word.count > maxLength else {
-                let range = maximumLength == nil ? match.range : (text as NSString).range(of: word)
-                let element = ActiveElement.create(with: type, text: word)
-                elements.append((range, element, type))
-                continue
+        for match in matches.reversed() where match.range.length > 2 {
+            let matchString = nsstring.substring(with: match.range)
+            let matchURL = matchString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+            // Strip common URL prefixes.
+            var visibleURL = matchString.replacingOccurrences(of: "https?://(www\\.)?", with: "", options: [.regularExpression, .caseInsensitive])
+            
+            if let maximumLength {
+                // Trim if max length is specified
+                visibleURL = visibleURL.trim(to: maximumLength)
             }
-
-            let trimmedWord = word.trim(to: maxLength)
-            text = text.replacingOccurrences(of: word, with: trimmedWord)
-
-            let newRange = (text as NSString).range(of: trimmedWord)
-            let element = ActiveElement.url(original: word, trimmed: trimmedWord)
-            elements.append((newRange, element, type))
+            
+            let range = NSRange(location: match.range.location, length: visibleURL.count)
+            text = (text as NSString).replacingCharacters(in: match.range, with: visibleURL)
+            
+            let element = ActiveElement.url(original: matchURL, trimmed: visibleURL)
+            elements.append((range, element, type))
         }
         return (elements, text)
     }
