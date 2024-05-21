@@ -36,7 +36,7 @@ struct ActiveBuilder {
             let matchString = nsstring.substring(with: match.range)
             let matchURL = matchString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             // Strip common URL prefixes.
-            var visibleURL = matchString.replacingOccurrences(of: "https?://(www\\.)?", with: "", options: [.regularExpression, .caseInsensitive])
+            var visibleURL = RegexParser.replace(pattern: RegexParser.urlSanitizePattern, in: matchString, with: "")
             
             if let maximumLength {
                 // Trim if max length is specified

@@ -16,12 +16,18 @@ struct RegexParser {
     static let urlPattern = "(^|[\\s.:;?\\-\\]<\\(])" +
         "((https?://|www\\.|pic\\.)[-\\w;/?:@&=+$\\|\\_.!~*\\|'()\\[\\]%#,☺]+[\\w/#](\\(\\))?)" +
     "(?=$|[\\s',\\|\\(\\).:;?\\-\\[\\]>\\)])"
+    static let urlSanitizePattern = "https?://(www\\.)?"
 
     private static var cachedRegularExpressions: [String : NSRegularExpression] = [:]
 
     static func getElements(from text: String, with pattern: String, range: NSRange) -> [NSTextCheckingResult]{
         guard let elementRegex = regularExpression(for: pattern) else { return [] }
         return elementRegex.matches(in: text, options: [], range: range)
+    }
+    
+    static func replace(pattern: String, in text: String, with replacement: String) -> String {
+        guard let regex = regularExpression(for: pattern) else { return text }
+        return regex.stringByReplacingMatches(in: text, range: NSRange(location: 0, length: text.count), withTemplate: replacement)
     }
 
     private static func regularExpression(for pattern: String) -> NSRegularExpression? {
