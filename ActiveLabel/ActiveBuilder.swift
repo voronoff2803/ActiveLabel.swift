@@ -46,6 +46,14 @@ struct ActiveBuilder {
             let range = NSRange(location: match.range.location, length: visibleURL.count)
             text = (text as NSString).replacingCharacters(in: match.range, with: visibleURL)
             
+            // Shift back any existing elements since we might've shortened the underlying string.
+            let fixupLength = match.range.length - visibleURL.count
+            elements = elements.map { tuple in
+                var adjustedTuple = tuple
+                adjustedTuple.range.location -= fixupLength
+                return adjustedTuple
+            }
+            
             let element = ActiveElement.url(original: matchURL, trimmed: visibleURL)
             elements.append((range, element, type))
         }
