@@ -326,8 +326,6 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
             case .email: attributes[NSAttributedString.Key.foregroundColor] = URLColor
             }
             
-            attributes[NSAttributedString.Key.font] = UIFont.systemFont(ofSize: font.pointSize, weight: .bold)
-            
 //            if let highlightFont = highlightFont {
 //                attributes[NSAttributedString.Key.font] = highlightFont
 //            }
@@ -336,6 +334,9 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
                 attributes = configureLinkAttribute(type, attributes, false)
             }
             
+            attributes[NSAttributedString.Key.font] = UIFont.systemFont(ofSize: font.pointSize, weight: .bold)
+            
+            print("set attr")
             for element in elements {
                 mutAttrString.setAttributes(attributes, range: element.range)
             }
@@ -386,6 +387,7 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
         paragraphStyle.lineSpacing = lineSpacing
         paragraphStyle.minimumLineHeight = minimumLineHeight > 0 ? minimumLineHeight: self.font.pointSize * 1.14
         attributes[NSAttributedString.Key.paragraphStyle] = paragraphStyle
+        print("set new ine")
         mutAttrString.setAttributes(attributes, range: range)
         
         return mutAttrString
