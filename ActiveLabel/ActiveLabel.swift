@@ -473,7 +473,6 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
     open override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         if onTouch(touch) { return }
-        print("pass")
         super.touchesBegan(touches, with: event)
     }
     
@@ -492,7 +491,6 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
     open override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else { return }
         if onTouch(touch) { return }
-        print("pass")
         super.touchesEnded(touches, with: event)
     }
     
