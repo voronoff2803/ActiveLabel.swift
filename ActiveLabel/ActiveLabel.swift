@@ -196,13 +196,13 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
         case .began, .moved, .regionEntered, .regionMoved:
             if let element = element(at: location) {
                 if element.range.location != selectedElement?.range.location || element.range.length != selectedElement?.range.length {
-//                    updateAttributesWhenSelected(false)
+                    updateAttributesWhenSelected(false)
                     selectedElement = element
-//                    updateAttributesWhenSelected(true)
+                    updateAttributesWhenSelected(true)
                 }
                 avoidSuperCall = true
             } else {
-//                updateAttributesWhenSelected(false)
+                updateAttributesWhenSelected(false)
                 selectedElement = nil
             }
         case .ended, .regionExited:
@@ -218,12 +218,12 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
             
             let when = DispatchTime.now() + Double(Int64(0.25 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
             DispatchQueue.main.asyncAfter(deadline: when) {
-//                self.updateAttributesWhenSelected(false)
+                self.updateAttributesWhenSelected(false)
                 self.selectedElement = nil
             }
             avoidSuperCall = true
         case .cancelled:
-//            updateAttributesWhenSelected(false)
+            updateAttributesWhenSelected(false)
             selectedElement = nil
         case .stationary:
             break
@@ -425,8 +425,6 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
             attributes[NSAttributedString.Key.foregroundColor] = unselectedColor
         }
         
-        attributes[NSAttributedString.Key.font] = UIFont.systemFont(ofSize: font.pointSize, weight: .bold)
-        
 //        if let highlightFont = highlightFont {
 //            attributes[NSAttributedString.Key.font] = highlightFont
 //        }
@@ -434,6 +432,8 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
         if let configureLinkAttribute = configureLinkAttribute {
             attributes = configureLinkAttribute(type, attributes, isSelected)
         }
+        
+        attributes[NSAttributedString.Key.font] = UIFont.systemFont(ofSize: font.pointSize, weight: .bold)
         
         textStorage.addAttributes(attributes, range: selectedElement.range)
         
