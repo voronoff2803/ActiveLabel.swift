@@ -328,9 +328,9 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
             
             attributes[NSAttributedString.Key.font] = UIFont.systemFont(ofSize: font.pointSize, weight: .bold)
             
-            if let highlightFont = highlightFont {
-                attributes[NSAttributedString.Key.font] = highlightFont
-            }
+//            if let highlightFont = highlightFont {
+//                attributes[NSAttributedString.Key.font] = highlightFont
+//            }
             
             if let configureLinkAttribute = configureLinkAttribute {
                 attributes = configureLinkAttribute(type, attributes, false)
@@ -423,9 +423,11 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
             attributes[NSAttributedString.Key.foregroundColor] = unselectedColor
         }
         
-        if let highlightFont = highlightFont {
-            attributes[NSAttributedString.Key.font] = highlightFont
-        }
+        attributes[NSAttributedString.Key.font] = UIFont.systemFont(ofSize: font.pointSize, weight: .bold)
+        
+//        if let highlightFont = highlightFont {
+//            attributes[NSAttributedString.Key.font] = highlightFont
+//        }
         
         if let configureLinkAttribute = configureLinkAttribute {
             attributes = configureLinkAttribute(type, attributes, isSelected)
