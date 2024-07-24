@@ -310,7 +310,7 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
         var range = NSRange(location: 0, length: 0)
         var attributes = mutAttrString.attributes(at: 0, effectiveRange: &range)
         
-        attributes[NSAttributedString.Key.font] = font!
+        attributes[NSAttributedString.Key.font] = UIFont.systemFont(ofSize: font.pointSize, weight: .bold)
         attributes[NSAttributedString.Key.foregroundColor] = textColor
         mutAttrString.addAttributes(attributes, range: range)
         
