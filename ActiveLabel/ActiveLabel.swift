@@ -218,12 +218,12 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
             
             let when = DispatchTime.now() + Double(Int64(0.25 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
             DispatchQueue.main.asyncAfter(deadline: when) {
-                self.updateAttributesWhenSelected(false)
+//                self.updateAttributesWhenSelected(false)
                 self.selectedElement = nil
             }
             avoidSuperCall = true
         case .cancelled:
-            updateAttributesWhenSelected(false)
+//            updateAttributesWhenSelected(false)
             selectedElement = nil
         case .stationary:
             break
