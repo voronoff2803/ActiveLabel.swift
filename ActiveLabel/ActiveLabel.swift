@@ -194,18 +194,17 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
         
         switch touch.phase {
         case .began, .moved, .regionEntered, .regionMoved:
-            break
-//            if let element = element(at: location) {
-//                if element.range.location != selectedElement?.range.location || element.range.length != selectedElement?.range.length {
+            if let element = element(at: location) {
+                if element.range.location != selectedElement?.range.location || element.range.length != selectedElement?.range.length {
 //                    updateAttributesWhenSelected(false)
-//                    selectedElement = element
+                    selectedElement = element
 //                    updateAttributesWhenSelected(true)
-//                }
-//                avoidSuperCall = true
-//            } else {
+                }
+                avoidSuperCall = true
+            } else {
 //                updateAttributesWhenSelected(false)
-//                selectedElement = nil
-//            }
+                selectedElement = nil
+            }
         case .ended, .regionExited:
             guard let selectedElement = selectedElement else { return avoidSuperCall }
             
