@@ -194,17 +194,18 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
         
         switch touch.phase {
         case .began, .moved, .regionEntered, .regionMoved:
-            if let element = element(at: location) {
-                if element.range.location != selectedElement?.range.location || element.range.length != selectedElement?.range.length {
-                    updateAttributesWhenSelected(false)
-                    selectedElement = element
-                    updateAttributesWhenSelected(true)
-                }
-                avoidSuperCall = true
-            } else {
-                updateAttributesWhenSelected(false)
-                selectedElement = nil
-            }
+            break
+//            if let element = element(at: location) {
+//                if element.range.location != selectedElement?.range.location || element.range.length != selectedElement?.range.length {
+//                    updateAttributesWhenSelected(false)
+//                    selectedElement = element
+//                    updateAttributesWhenSelected(true)
+//                }
+//                avoidSuperCall = true
+//            } else {
+//                updateAttributesWhenSelected(false)
+//                selectedElement = nil
+//            }
         case .ended, .regionExited:
             guard let selectedElement = selectedElement else { return avoidSuperCall }
             
@@ -336,7 +337,7 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
             
             attributes[NSAttributedString.Key.font] = UIFont.systemFont(ofSize: font.pointSize, weight: .bold)
             
-            print("set attr")
+
             for element in elements {
                 mutAttrString.setAttributes(attributes, range: element.range)
             }
