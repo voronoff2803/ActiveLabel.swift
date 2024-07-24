@@ -335,6 +335,7 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
             }
             
             attributes[NSAttributedString.Key.font] = UIFont.systemFont(ofSize: font.pointSize, weight: .bold)
+            attributes[NSAttributedString.Key.kern] = -0.9
             
 
             for element in elements {
@@ -433,6 +434,7 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
         }
         
         attributes[NSAttributedString.Key.font] = UIFont.systemFont(ofSize: font.pointSize, weight: .bold)
+        attributes[NSAttributedString.Key.kern] = -0.9
         
         textStorage.addAttributes(attributes, range: selectedElement.range)
         
