@@ -196,13 +196,13 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
         case .began, .moved, .regionEntered, .regionMoved:
             if let element = element(at: location) {
                 if element.range.location != selectedElement?.range.location || element.range.length != selectedElement?.range.length {
-                    updateAttributesWhenSelected(false)
+//                    updateAttributesWhenSelected(false)
                     selectedElement = element
-                    updateAttributesWhenSelected(true)
+//                    updateAttributesWhenSelected(true)
                 }
                 avoidSuperCall = true
             } else {
-                updateAttributesWhenSelected(false)
+//                updateAttributesWhenSelected(false)
                 selectedElement = nil
             }
         case .ended, .regionExited:
@@ -218,12 +218,12 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
             
             let when = DispatchTime.now() + Double(Int64(0.25 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
             DispatchQueue.main.asyncAfter(deadline: when) {
-                self.updateAttributesWhenSelected(false)
+//                self.updateAttributesWhenSelected(false)
                 self.selectedElement = nil
             }
             avoidSuperCall = true
         case .cancelled:
-            updateAttributesWhenSelected(false)
+//            updateAttributesWhenSelected(false)
             selectedElement = nil
         case .stationary:
             break
@@ -387,7 +387,6 @@ typealias ElementTuple = (range: NSRange, element: ActiveElement, type: ActiveTy
         paragraphStyle.lineSpacing = lineSpacing
         paragraphStyle.minimumLineHeight = minimumLineHeight > 0 ? minimumLineHeight: self.font.pointSize * 1.14
         attributes[NSAttributedString.Key.paragraphStyle] = paragraphStyle
-        print("set new ine")
         mutAttrString.setAttributes(attributes, range: range)
         
         return mutAttrString
